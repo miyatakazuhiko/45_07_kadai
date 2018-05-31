@@ -35,6 +35,9 @@ if($status==false){
   exit("sqlError:".$error[2]);
 }else{
   header("Location: index.php");
+  exit;
 }
+
+
 
 ?>

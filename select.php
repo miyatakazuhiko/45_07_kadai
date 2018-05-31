@@ -11,12 +11,9 @@
 
 <?php
 
-function h($value){
-  return htmlspecialchars($value,ENT_QUOTES);
-}
+include("funcs.php");
 
-
-//1.  DB接続します
+//1.  DB接続
 try {
   $pdo = new PDO('mysql:dbname=kadai_07;charset=utf8;host=localhost','root','');
 } catch (PDOException $e) {
@@ -36,42 +33,22 @@ if($status==false) {
 }else{
   //Selectデータの数だけ自動でループしてくれる
   while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){ 
-    $view .= "<p>"."No". $result["No"].".". h($result["書籍名"])."　URL:".h($result["書籍URL"])."　メモ:". h($result["書籍コメント"])."　".$result["登録日時"]. "</p>";
-    //<p>タグで囲むと表示のされ方が段落ごとになる。
+    // $view .= "<p>"."No". $result["No"].".". h($result["書籍名"])."　URL:".h($result["書籍URL"])."　メモ:". h($result["書籍コメント"])."　".$result["登録日時"]. "</p>";
+    $view .= "<p>";
+    $view .= $result["No"]."：";
+    $view .= '<a href="u_view.php?id='.$result["No"].'">';
+    $view .= h($result["書籍名"]);
+    $view .= '</a>';
+    $view .= "：".h($result["書籍URL"])."　".h($result["登録日時"]);
+    $view .= "</p>";
+    //.= がないと前のデータに上書きになる。
   }
 }
 ?>
 
-<header>
-  <h1>Bookmark</h1>
-</header>  
-
-<div class="flex">
-
-  <div class="left">
-    <form method="POST" action="insert.php">
-      <fieldset><!-- フォームの入力項目をグループ化する際に使用 -->
-        <legend>お気に入りを保存</legend><!-- <FIELDSET>タグでグループ化されたフォームの入力項目にタイトルを付けるタグ -->
-          <label>タイトル：<input type="text" name="title" required  class="text_size"></label><br>
-          <label>　　URL：<input type="text" name="url" required class="text_size"></label><br>
-          <label>
-            <div class="flex_in">
-              <p>　　メモ：<p>
-              <textarea name="memo" class="text_size text_size_h"></textarea>
-            </div>
-          </label>
-          <input type="submit" value="送信">
-      </fieldset>
-  </div>
-  
-  <div class="favo_size">
-    <div class="favo_size_in">
-      <a href="select.php" class="favo">お気に入り表示</a>
-    </div>
-  </div>    
-
-</div>
-
+<?php
+  include("index.php");
+?>
 
 <!-- Main[Start] -->
 <div>
