@@ -21,13 +21,13 @@ try {
 
 //3.データ登録SQL作成
 $sql = "INSERT INTO kadai_07_table(No , 書籍名 ,書籍URL ,書籍コメント ,登録日時)
-VALUES(NULL, :a1, :a2, :a3 ,sysdate())";
+VALUES(NULL, :title, :url, :memo ,sysdate())";
 
 $stmt = $pdo->prepare($sql);
 
-$stmt->bindValue(':a1', $title, PDO::PARAM_STR);
-$stmt->bindValue(':a2', $url, PDO::PARAM_STR);
-$stmt->bindValue(':a3', $memo, PDO::PARAM_STR);
+$stmt->bindValue(':title', $title, PDO::PARAM_STR);
+$stmt->bindValue(':url', $url, PDO::PARAM_STR);
+$stmt->bindValue(':memo', $memo, PDO::PARAM_STR);
 $status = $stmt->execute();
 
 if($status==false){

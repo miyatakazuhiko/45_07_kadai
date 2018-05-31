@@ -46,7 +46,7 @@ if($status==false) {
 <div class="flex">
 
   <div class="left">
-    <form method="POST" action="insert.php">
+    <form method="POST" action="update.php">
       <fieldset><!-- フォームの入力項目をグループ化する際に使用 -->
         <legend>お気に入りを保存</legend><!-- <FIELDSET>タグでグループ化されたフォームの入力項目にタイトルを付けるタグ -->
           <label>タイトル：<input type="text" name="title" value="<?=$row["書籍名"]?>" required  class="text_size"></label><br>
@@ -57,6 +57,7 @@ if($status==false) {
               <textarea name="memo" class="text_size text_size_h"><?=$row["書籍コメント"]?></textarea>
             </div>
           </label>
+          <input type="hidden" name="No" value="<?=$row["No"]?>">
           <input type="submit" value="送信">
       </fieldset>
   </div>

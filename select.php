@@ -33,13 +33,17 @@ if($status==false) {
 }else{
   //Selectデータの数だけ自動でループしてくれる
   while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){ 
-    // $view .= "<p>"."No". $result["No"].".". h($result["書籍名"])."　URL:".h($result["書籍URL"])."　メモ:". h($result["書籍コメント"])."　".$result["登録日時"]. "</p>";
     $view .= "<p>";
     $view .= $result["No"]."：";
     $view .= '<a href="u_view.php?id='.$result["No"].'">';
     $view .= h($result["書籍名"]);
     $view .= '</a>';
-    $view .= "：".h($result["書籍URL"])."　".h($result["登録日時"]);
+    $view .= "：".h($result["書籍URL"])."　■メモ【 ".h($result["書籍コメント"]);
+    $view .= " 】 ☆".h($result["登録日時"]);
+    $view .= '　';
+    $view .= '<a href="delete.php?id='.$result["No"].'">';
+    $view .= '[削除]';
+    $view .= '</a>';
     $view .= "</p>";
     //.= がないと前のデータに上書きになる。
   }
