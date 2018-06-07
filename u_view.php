@@ -64,11 +64,17 @@ if($status==false) {
   
   <div class="favo_size">
     <div class="favo_size_in">
-      <a href="select.php" class="favo">お気に入り表示</a>
+      <a href="view.php" class="favo">お気に入り表示</a>
     </div>
   </div>    
 
 </div>
-
+<div class="logout_flex_in">
+  <div class="logout_position">
+    <div class="logout_size flex_in">
+          <a href="logout.php">ログアウト</a>
+    </div>
+  </div>
+</div>
 </body>
 </html>

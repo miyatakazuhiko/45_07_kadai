@@ -1,13 +1,22 @@
-<?php
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/style.css">
+  <title>本をブックマーク</title>
+</head>
+<body>
 
+<?php
+session_start();
 include("funcs.php");
 
-//1.  DB接続
-try {
-  $pdo = new PDO('mysql:dbname=kadai_07;charset=utf8;host=localhost','root','');
-} catch (PDOException $e) {
-  exit('dbError'.$e->getMessage());
-}
+loginCheck();
+
+//1.DB接続
+$pdo = db_connect();
 
 //２．データ登録SQL作成
 $stmt = $pdo->prepare('SELECT * FROM kadai_07_table');
@@ -34,20 +43,10 @@ if($status==false) {
     $view .= '[削除]';
     $view .= '</a>';
     $view .= "</p>";
-    //.= がないと前のデータに上書きになる。
   }
 }
+
 ?>
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="css/style.css">
-  <title>本をブックマーク</title>
-</head>
-<body>
 
 <header>
   <h1>Bookmark</h1>
@@ -72,11 +71,24 @@ if($status==false) {
   </div>
   
   <div class="favo_size">
-    <div class="favo_size_in">
-      <a href="view.php" class="favo">お気に入り表示</a>
-    </div>
   </div>    
 </div>
+
+<!-- お気に入り表示 -->
+<div class="open">
+  <table width="776px" border="1">
+  <tr>
+    <th scope="col">No</th>
+    <th scope="col">書籍名</th>
+    <th scope="col">書籍URL</th> 
+    <th scope="col">書籍コメント</th>
+    <th scope="col">登録日時</th>
+    <th scope="col">削除</th>
+  </tr>
+  <?=$view?>
+  </table>
+</div>
+<!-- [End] -->
 
 <div class="logout_flex_in">
   <div class="logout_position">

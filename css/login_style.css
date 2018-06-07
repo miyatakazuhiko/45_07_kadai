@@ -27,21 +27,6 @@ h1{
   color: #fff;
 }
 
-
-fieldset {
-  width: 380px;
-  height: 230px;
-  border: solid 2px #00ff00;
-}
-
-.text_size{
-  width: 270px;
-}
-
-.text_size_h {
-  height: 50px;
-}
-
 .flex {
   width: 800px;
   display: flex;
@@ -62,42 +47,43 @@ fieldset {
   border: solid 2px #00ff00;
 }
 
-.favo_size_in {
-  margin: 140px 50px 0 50px;
+.ippan_size_in {
+  margin: 140px 65px 0 65px;
+  width: 240px;
   color: #fff;
+  font-size: 30px; 
 }
 
-.favo {
-  margin-top: 100px;
-  font-size: 40px;
-}
-
-.open {
-  margin-top: 5px;
-  width: 796px;
-  height: 100px;
-  overflow-y: scroll;
-  border: solid 2px #00ff00;
-}
-
-/* ログイン */
-
-.logout_position {
+.login_size {
   margin-top: 10px;
-  width: 120px;
-  height: 100px;
-  background-image: url(../img/logout.jpg);
+  width: 380px;
+  height: 220px;
+  background-image: url(../img/login_favo_background.jpg);
   background-position: center;
   background-size: cover;
   border: solid 2px #00ff00;
 }
 
-.logout_size {
-  margin: 80px 0 0 30px;
+.login_size_in {
+  margin: 140px 65px 0 65px;
+  width: 240px;
   color: #fff;
 }
 
-.logout_flex_in{
-  display: flex;
-  justify-content: flex-end;
+.login_text{
+  size: 22px;
+  border: solid 1px #ffffff;
+  filter:alpha(opacity=80);
+  -moz-opacity:0.80;
+  opacity:0.80;
+}
+
+.login_btn{
+  margin-top: 4px;
+  height: 42px;
+  background-color: #ffffff;
+  border: solid 1px #ffffff;
+  filter:alpha(opacity=95);
+  -moz-opacity:0.95;
+  opacity:0.95;
 }

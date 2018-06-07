@@ -18,25 +18,18 @@
   <div class="left">
     <form method="POST" action="insert.php">
       <fieldset><!-- フォームの入力項目をグループ化する際に使用 -->
-        <legend>お気に入りを保存</legend><!-- <FIELDSET>タグでグループ化されたフォームの入力項目にタイトルを付けるタグ -->
-          <label>タイトル：<input type="text" name="title" required  class="text_size"></label><br>
-          <label>　　URL：<input type="text" name="url" required class="text_size"></label><br>
-          <label>
-            <div class="flex_in">
-              <p>　　メモ：<p>
-              <textarea name="memo" class="text_size text_size_h"></textarea>
-            </div>
-          </label>
+        <legend>ユーザー登録</legend><!-- <FIELDSET>タグでグループ化されたフォームの入力項目にタイトルを付けるタグ -->
+          <label>　ID：<input type="text" name="ID" required  class="text_size"></label><br>
+          <label>pass：<input type="text" name="pass" required class="text_size"></label><br>
           <input type="submit" value="送信">
       </fieldset>
   </div>
   
   <div class="favo_size">
     <div class="favo_size_in">
-      <a href="select.php" class="favo">お気に入り表示</a>
+      <a href="login.php" class="favo">ログイン画面へ</a>
     </div>
   </div>    
-
 </div>
 
 </body>
