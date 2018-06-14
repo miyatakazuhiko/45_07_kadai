@@ -1,42 +1,13 @@
 <?php
-
+session_start();
 include("funcs.php");
 
 //1.  DB接続
-try {
-  $pdo = new PDO('mysql:dbname=kadai_07;charset=utf8;host=localhost','root','');
-} catch (PDOException $e) {
-  exit('dbError'.$e->getMessage());
-}
+$pdo = db_connect();
 
-//２．データ登録SQL作成
-$stmt = $pdo->prepare('SELECT * FROM kadai_07_table');
-$status = $stmt->execute();
+loginCheck();
 
-//３．データ表示
-$view="";//データ表示のための変数
-if($status==false) {
-  $error = $stmt->errorInfo();
-  exit("sqlError".$error[2]);
 
-}else{
-  //Selectデータの数だけ自動でループしてくれる
-  while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){ 
-    $view .= "<p>";
-    $view .= $result["No"]."：";
-    $view .= '<a href="u_view.php?id='.$result["No"].'">';
-    $view .= h($result["書籍名"]);
-    $view .= '</a>';
-    $view .= "：".h($result["書籍URL"])."　■メモ【 ".h($result["書籍コメント"]);
-    $view .= " 】 ☆".h($result["登録日時"]);
-    $view .= '　';
-    $view .= '<a href="delete.php?id='.$result["No"].'">';
-    $view .= '[削除]';
-    $view .= '</a>';
-    $view .= "</p>";
-    //.= がないと前のデータに上書きになる。
-  }
-}
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -59,6 +30,8 @@ if($status==false) {
     <form method="POST" action="insert.php">
       <fieldset><!-- フォームの入力項目をグループ化する際に使用 -->
         <legend>お気に入りを保存</legend><!-- <FIELDSET>タグでグループ化されたフォームの入力項目にタイトルを付けるタグ -->
+          <input type="hidden" name="ID" value='<?=$_SESSION["ID"]?>'>
+          <input type="hidden" name="pass" value='<?=$_SESSION["pass"]?>'>
           <label>タイトル：<input type="text" name="title" required  class="text_size"></label><br>
           <label>　　URL：<input type="text" name="url" required class="text_size"></label><br>
           <label>

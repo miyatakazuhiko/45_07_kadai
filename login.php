@@ -23,12 +23,25 @@
   <div class="login_size">
     <form class="login_size_in flex_in" method="post" action="login_act.php">
       <div>
-        <label><input type="text" name="lid" placeholder="ID" required class="login_text"></label>
-        <label><input type="text" name="lpw" placeholder="password" required class="login_text"></label>
-        <!-- <label>PW:<input type="text" name="lpw"></label> PW:とinputをひとまとめにするには？divでは無理-->
+        <label><input type="text" name=ID placeholder="ID" required class="login_text"></label>
+        <label><input type="text" name="pass" placeholder="password" required class="login_text"></label>
       </div>
       <div>
         <label><input class="login_btn" type="submit" value="ログイン" ></label>
+      </div>  
+      </form>
+    </div> 
+  </div>
+
+  <div class="">
+    <p>管理者ログイン画面</p>
+    <form class="" method="post" action="manager_act.php">
+      <div>
+        <label><input type="text" name="kID" placeholder="kID" required class=""></label>
+        <label><input type="text" name="kpass" placeholder="kpass" required class=""></label>
+      </div>
+      <div>
+        <label><input class="" type="submit" value="ログイン" ></label>
       </div>  
       </form>
     </div> 

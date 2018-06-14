@@ -4,7 +4,42 @@ include("funcs.php");
 
 logoutCheck();
 
+$pdo = db_connect();
+
+$stmt = $pdo->prepare('SELECT * FROM `kadai_07_table` WHERE `書籍名` IS NOT NULL AND `書籍名`!="" ');
+$status = $stmt->execute();
+
+$view="";
+
+if($status==false){
+  $error = $stmt-errorInfo();
+  exit("sqlError".$error[2]);
+}else{
+  $view .= '<table width="776px" border="1">';
+  $view .= '<tr>';
+  $view .=  '<th style="width:200px">書籍名</th>';
+  $view .=  '<th style="width:376px">書籍URL</th> ';
+  $view .=  '<th style="width:200px">書籍コメント</th>';
+  $view .= '</tr>';
+
+  while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){ 
+    $view .= '<tr>';
+    $view .= "<td style=width:220px>";
+    $view .= h($result["書籍名"]);
+    $view .= "</td>";
+    $view .= "<td>";
+    $view .= h($result["書籍URL"]);
+    $view .= "</td>";
+    $view .= "<td>";
+    $view .= h($result["書籍コメント"]);
+    $view .= "</td>";
+    $view .= '</tr>';
+  }
+
+  $view .= '</table>';
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -39,9 +74,6 @@ logoutCheck();
   </div>    
 </div>
 
-<div>
-  <a href="index_view.php">ちょっとなんか見る。</a>
-</div>
-
+<div style="width:800px"><?=$view?></div>
 </body>
 </html>

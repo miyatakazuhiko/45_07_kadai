@@ -27,6 +27,11 @@ h1{
   color: #fff;
 }
 
+table {
+  /* table-layout: fixed; */
+  word-break: break-all;
+  word-wrap: break-all;
+}
 
 fieldset {
   width: 380px;
@@ -78,6 +83,10 @@ fieldset {
   height: 100px;
   overflow-y: scroll;
   border: solid 2px #00ff00;
+}
+
+.view {
+  table-layout: fixed;
 }
 
 /* ログイン */

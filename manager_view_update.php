@@ -1,4 +1,5 @@
 <?php
+
 include("funcs.php");
 
 //1.取得
@@ -24,7 +25,7 @@ if($status==false){
   $error = $stmt->errorInfo();
   exit("QueryError:".$error[2]);
 } else {
-  header("Location: view.php");
+  header("Location: manager_view.php");
   exit;
 }
 

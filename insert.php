@@ -1,4 +1,6 @@
 <?php
+include("funcs.php");
+
 //受け取りチェック
 if (
   !isset($_POST["title"]) || $_POST["title"]=="" ||
@@ -8,23 +10,23 @@ if (
 }
 
 //POSTデータ
+$ID = $_POST["ID"];
+$pass = $_POST["pass"];
 $title = $_POST["title"];
 $url = $_POST["url"];
 $memo = $_POST["memo"];
 
 //DB接続
-try {
-  $pdo = new PDO('mysql:dbname=kadai_07;charset=utf8;host=localhost','root','');
-} catch (PDOEexception $e) {
-  exit ('DbConnectError:'.$e->getMessage());
-}
+$pdo = db_connect();
 
 //3.データ登録SQL作成
-$sql = "INSERT INTO kadai_07_table(No , 書籍名 ,書籍URL ,書籍コメント ,登録日時)
-VALUES(NULL, :title, :url, :memo ,sysdate())";
+$sql = "INSERT INTO kadai_07_table(No ,ID ,pass, 書籍名 ,書籍URL ,書籍コメント ,登録日時)
+VALUES(NULL, :ID, :pass, :title, :url, :memo ,sysdate())";
 
 $stmt = $pdo->prepare($sql);
 
+$stmt->bindValue(':ID', $ID, PDO::PARAM_STR);
+$stmt->bindValue(':pass', $pass, PDO::PARAM_STR);
 $stmt->bindValue(':title', $title, PDO::PARAM_STR);
 $stmt->bindValue(':url', $url, PDO::PARAM_STR);
 $stmt->bindValue(':memo', $memo, PDO::PARAM_STR);
@@ -37,7 +39,5 @@ if($status==false){
   header("Location: select.php");
   exit;
 }
-
-
 
 ?>

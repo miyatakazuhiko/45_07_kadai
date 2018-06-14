@@ -1,14 +1,13 @@
 <?php
+session_start();
+include("funcs.php");
+
+loginCheck();
 //1.GETでidを取得
 $id = $_GET["id"];
 
 //2.DB接続など
-try{
-  $pdo = new PDO('mysql:dbname=kadai_07;charset=utf8;host=localhost','root','');
-} catch (PDOException $e) {
-  exit('データベースに接続出来ませんでした。'.$e->getMessage());
-}
-
+$pdo = db_connect();
 
 //3.SELECT
 $sql = "SELECT * FROM kadai_07_table WHERE No=:id";
@@ -17,7 +16,6 @@ $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 $status = $stmt->execute();
 
 //4.データ表示
-$view="";
 if($status==false) {
   $error = $stmt->errorInfo();
   exit("ErrorQuery:".$error[2]);
@@ -49,6 +47,8 @@ if($status==false) {
     <form method="POST" action="update.php">
       <fieldset><!-- フォームの入力項目をグループ化する際に使用 -->
         <legend>お気に入りを保存</legend><!-- <FIELDSET>タグでグループ化されたフォームの入力項目にタイトルを付けるタグ -->
+          <input type="hidden" name="ID" value="<?=$_SESSION["ID"]?>">
+          <input type="hidden" name="pass" value="<?=$_SESSION["pass"]?>">
           <label>タイトル：<input type="text" name="title" value="<?=$row["書籍名"]?>" required  class="text_size"></label><br>
           <label>　　URL：<input type="text" name="url" value="<?=$row["書籍URL"]?>" required class="text_size"></label><br>
           <label>
@@ -60,6 +60,7 @@ if($status==false) {
           <input type="hidden" name="No" value="<?=$row["No"]?>">
           <input type="submit" value="送信">
       </fieldset>
+    </form> 
   </div>
   
   <div class="favo_size">
